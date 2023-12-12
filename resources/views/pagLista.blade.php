@@ -1,7 +1,7 @@
 @extends('pagPlantilla')
 
 @section('titulo')
-    <h1 class="display-4"> Pagina Lista </h1>
+    <h1 class="display-4"> Pagina Lista - Carlos Calvo</h1>
 @endsection
 
 
