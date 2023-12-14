@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('Estudiante.xRegistrar') }}" method="post" class="d-grid gap-2">
+    <form action="{{route('Estudiante.xRegistrar') }}" method="post" class="d-grid gap-2">
         @csrf
 
         @error('codEst')

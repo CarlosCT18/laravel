@@ -8,7 +8,7 @@ Route::get('/',[PagesController::class, 'fnIndex']) -> name('xInicio');
 
 // create
 Route::post('/',[PagesController::class, 'fnRegistrar'])->name('Estudiante.xRegistrar');
-
+Route::post('/',[PagesController::class, 'fnRegistrarSeg'])->name('Seguimiento.xRegistrar');
 //read
 Route::get('detalle/{id}', [PagesController::class, 'fnEstDetalle']) -> name('Estudiante.xDetalle');
 
@@ -20,10 +20,12 @@ Route::get('/seguimiento', [PagesController::class, 'fnSeguimiento']) -> name('x
 //UDDATE
 Route::get('/actualizar/{id}', [PagesController::class, 'fnEstActualizar']) -> name('Estudiante.xActualizar'); //paso 1
 Route::put('/actualizar/{id}', [PagesController::class, 'fnUpdate']) -> name('Estudiante.xUpdate'); // paso 2
+Route::get('/actualizar/{id}', [PagesController::class, 'fnSegActualizar']) -> name('Seguimiento.xActualizar'); //paso 1
+Route::put('/actualizar/{id}', [PagesController::class, 'fnUpdateSeg']) -> name('Seguimiento.xUpdate'); // paso 2
 
 //DELETE
 Route::delete('/eliminar/{id}', [PagesController::class, 'fnEliminar']) -> name('Estudiante.xEliminar');
-
+Route::delete('/eliminar/{id}', [PagesController::class, 'fnEliminarSeg']) -> name('Seguimiento.xEliminar');
 /*Route::get('/', function () {
     return view('welcome');
 }) -> name ('xInicio');*/

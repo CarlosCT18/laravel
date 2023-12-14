@@ -19,6 +19,11 @@ class PagesController extends Controller
         return view('Estudiante.pagActualizar', compact('xActAlumnos'));
     }
 
+    public function fnSegActualizar($id){
+        $xActSeg = Seguimiento::findOrFail($id); //datos de BD po id
+        return view('Estudiante.pagActualizarSeg', compact('xActSeg'));
+    }
+
     public function fnUpdate(Request $request, $id){
 
         $xUpdateAlumnos = Estudiante::findOrFail($id);
@@ -37,6 +42,22 @@ class PagesController extends Controller
 
     }
 
+    public function fnUpdateSeg(Request $request, $id){
+
+        $xUpdateSeguimiento = Seguimiento::findOrFail($id);
+        
+        $xUpdateSeguimiento -> idEst = $request -> idEst;
+        $xUpdateSeguimiento -> traAct = $request -> traAct;
+        $xUpdateSeguimiento -> ofiAct = $request -> ofiAct ;
+        $xUpdateSeguimiento -> satEst = $request -> satEst;
+        $xUpdateSeguimiento -> fecSeg = $request -> fecSeg;
+        $xUpdateSeguimiento -> estSeg = $request -> estSeg;
+       
+        $xUpdateSeguimiento -> save();   // Guardando en BD
+
+        return back()->with('msj', 'Se actualizo con éxito...');
+
+    }
     public function fnRegistrar(Request $request){
               
         $request -> validate([
@@ -64,6 +85,30 @@ class PagesController extends Controller
         return back()->with('msj', 'Se registro con éxito...');
     }
     
+    public function fnRegistrarSeg(Request $request){
+              
+        $request -> validate([
+            'idEst'=>'required',
+            'traAct'=>'required',
+            'ofiAct'=>'required',
+            'satEst'=>'required',
+            'fecSeg'=>'required',
+            'estSeg'=>'required',
+        ]);
+
+        $nuevoSeguimiento = new Seguimiento;
+
+        $nuevoSeguimiento ->idEst = $request->idEst;
+        $nuevoSeguimiento ->traAct = $request->traAct;
+        $nuevoSeguimiento ->ofiAct = $request->ofiAct;
+        $nuevoSeguimiento ->satEst = $request->satEst;
+        $nuevoSeguimiento ->fecSeg = $request->fecSeg;
+        $nuevoSeguimiento ->estSeg = $request->estSeg;
+        
+        $nuevoSeguimiento->save(); //guardar en BD
+
+        return back()->with('msj', 'Se registro con éxito...');
+    }
     
     public function fnEstDetalle($id){
         $xDetAlumnos = estudiante_detalle::findOrFail($id); //Datos de BD por id
@@ -73,6 +118,12 @@ class PagesController extends Controller
     public function fnEliminar($id){
         $deleteAlumno = Estudiante::findOrFail($id);
         $deleteAlumno->delete();
+        return back()->with('msj', 'Se elimino con éxito...');
+    }
+
+    public function fnEliminarSeg($id){
+        $deleteSeguimiento = Seguimiento::findOrFail($id);
+        $deleteSeguimiento->delete();
         return back()->with('msj', 'Se elimino con éxito...');
     }
 

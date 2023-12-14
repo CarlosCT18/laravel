@@ -13,40 +13,41 @@
         </div>
     @endif
 
-    <form action= "" method="POST"> <!--{{ route('Estudiante.xRegistrar') }}" method="post" class="d-grid gap-2"-->
+    <form action="{{ route('Seguimiento.xRegistrar') }}" method="post" class="d-grid gap-2">
         @csrf
 
-        @error('codEst')
+       
+        @error('idEst')
             <div class="alert alert-danger">
                 El <strong>Código</strong> es requerido
             </div>
         @enderror
 
-        @error('nomEst')
+        @error('traAct')
             <div class="alert alert-danger">
-                Los <strong>Id Estudiante</strong> son requeridos
+                Los <strong>Nombres</strong> son requeridos
             </div>
         @enderror
 
-        @if($errors ->has('apeEst'))
+        @if($errors ->has('ofiAct'))
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 Los <strong>Apellidos</strong> son requeridos
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         
-        @error('fnEst')
+        @error('satEst')
             <div class="alert alert-danger">
                 La fecha de nacimiento es requerida
             </div>
         @enderror
 
-        @error('turMat')
+        @error('fecSeg')
             <div class="alert alert-danger">
                 El turno de matricula es requerido
             </div>
         @enderror
 
-        @error('semMat')
+        @error('estSeg')
             <div class="alert alert-danger">
                 El semestre de matricula es requerido
             </div>
@@ -79,7 +80,7 @@
             <option value="2">Bueno</option>
             <option value="3">Muy bueno</option>
         </select>
-        <input type="date" name="fecSeg" value="{{old('fnaEst')}}" class="form-control mb-2">
+        <input type="date" name="fecSeg" value="{{old('fnEst')}}" class="form-control mb-2">
         <select name="estSeg" class="form-control mb-2">
             <option value="">Seleccione...</option>
             <option value="0">Inactivo</option>
@@ -108,19 +109,26 @@
             @foreach($xAluSeg as $item)
             <tr>
                 <th scope="row">{{ $item->id }}</th>
-                <td>{{ $item->codEst }}</td>
+                <td>{{ $item->idEst }}</td>
+                <td>{{ $item->traAct }}</td>
+                <td>{{ $item->ofiAct }}</td>
+                <td>{{ $item->satEst }}</td>
+                <td>{{ $item->fecSeg }}</td>
+                <td>{{ $item->estSeg }}</td>
+
+
                 <td>
                     <a href="{{ route('Estudiante.xDetalle', $item->id ) }}">
                         {{ $item->apeEst }}, {{ $item->nomEst }}
                     </a>
                 </td>
                  <td>
-                    <form action="{{ route('Estudiante.xEliminar', $item->id) }}" method="post" class="d-inline">
+                    <form action="{{ route('Seguimiento.xEliminar', $item->id) }}" method="post" class="d-inline">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm">X</button>
                     </form>
-                    <a class="btn btn-warning btn-sm" href="{{ route('Estudiante.xActualizar', $item->id ) }}">
+                    <a class="btn btn-warning btn-sm" href="{{ route('Seguimiento.xActualizar', $item->id ) }}">
                         ...A
                     </a>
                 </td> 
@@ -130,6 +138,5 @@
         </tbody>
     </table>
 
-    
 @endsection
 
